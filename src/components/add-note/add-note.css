@@ -1,0 +1,24 @@
+.add-note input{
+  line-height: 2rem;
+  width: 60%;
+}
+
+.add-note button{
+  line-height: 2rem;
+  width: 15%;
+  cursor: pointer;
+}
+.add-note select{
+  line-height: 2rem;
+  width: 15%;
+  height: 2rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.add-note select option{
+  line-height: 2rem;
+  width: 15%;
+  height: 2rem;
+  cursor: pointer;
+}

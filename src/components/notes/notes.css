@@ -1,0 +1,17 @@
+/* 
+.high{
+  background-color: coral;
+}
+.medium{
+  background-color: tomato;
+}
+.low{
+  background-color: greenyellow;
+} */
+
+.right-corner{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: .5rem;
+}
