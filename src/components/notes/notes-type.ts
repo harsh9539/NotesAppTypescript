@@ -4,14 +4,14 @@ export type Priority = 'high'|'medium'|'low';
 
 
 export type NoteProps={
-  id?:Number,
+  id?:string,
   text:String,
-  priority?:Priority
+  priority?:Priority,
 }
 
 export type NoteTypes={
-  id:String | Number,
-  text:String,
+  id:string,
+  text:string,
   priority:Priority
 }
 
