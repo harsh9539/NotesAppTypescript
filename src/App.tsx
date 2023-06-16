@@ -1,60 +1,40 @@
-import { useState } from "react";
-import AddNote from "./components/add-note/add-note"
-import Notes from "./components/notes/Notes"
-import { NotesData } from "./data"
+import { useReducer, useState } from "react";
+import "./App.css"
+import { ThemeContext } from "./context/theme/theme";
+import Home from "./pages/Home/Home";
+import Switch from "react-switch";
 import { NoteTypes } from "./components/notes/notes-type";
+
+type ThemeProp = 'dark' | 'light';
+type StateType = {
+  notes:NoteTypes[],
+  editMode:boolean,
+  noteToBeEdited:NoteTypes | null
+}
+
 function App() {
-  const [notes,setNotes] = useState(NotesData);
-  const [editMode,setEditMode] = useState(false);
-  const [noteToBeEdited,setNoteToBeEdited] = useState<NoteTypes | null>(null);
+  const [theme,setTheme] = useState<ThemeProp>('light');
+  const [checked,setChecked] = useState(false);
 
-  const addNote = (note:NoteTypes)=>{
-    setNotes([note,...notes]);
-  }
-
-  const updateNote = (updatedNote:NoteTypes)=>{
-    const index = notes.findIndex(note=>note.id === updatedNote.id);
-    let editedNotes = [...notes];
-    editedNotes.splice(index,1,updatedNote);
-    setNotes(editedNotes);
-    setEditMode(false);
-  }
-
-  const editNote = (id:string)=>{
-    console.log(id);
-    const note = notes.find(note=>note.id === id);
-    setEditMode(true);
-    if(note){
-      setNoteToBeEdited(note);
+  const [state,dispatch] = useReducer((state:StateType,action:{type:string,payload:any})=>{
+    switch(action.type){
+      default:
+        return state;
     }
-  }
-  const deleteNote = (id:string)=>{
-    const index = notes.findIndex(note=>note.id === id);
-    let editedNotes = [...notes];
-    editedNotes.splice(index,1);
-    setNotes(editedNotes);
-  }
+  },{notes:[],editMode:false,noteToBeEdited:null})
 
+  const changeHandler = (check:boolean)=>{
+    setChecked(!checked);
+    if(check){
+      setTheme('dark');
+    }
+    else setTheme('light');
+  }
   return (
-    <div className="App">
-      <h2>Notes App {notes.length}</h2>
-      <AddNote addNote={addNote} editMode={editMode} noteToBeEdited={noteToBeEdited}
-      updateNote={updateNote}
-      />
-      <div>
-        {
-          notes.map((note,key) => (
-            <Notes key={key}
-            text={note.text} 
-            priority={note.priority} 
-            id={note.id}
-            editNote={editNote}
-            deleteNote={deleteNote}
-            />
-          ))
-        }
-      </div>
-    </div>
+    <ThemeContext.Provider value={theme}>
+      <Switch onChange={changeHandler} checked={checked}></Switch>
+      <Home />
+    </ThemeContext.Provider>
   )
 }
 

@@ -2,7 +2,6 @@
   border: 1px solid grey;
   padding: 3rem;
   font-size: 1rem;
-  color: #333;
   height: 10rem;
   border-radius: 0.5rem;
   background-color: rgb(241, 229, 212);
@@ -11,3 +10,9 @@
   position: relative;
 }
 
+.card.dark{
+  color:white
+}
+.card.light{
+  color: #333;
+}
